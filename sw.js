@@ -1,5 +1,5 @@
 // Offline cache for "Команди ES". Bump VERSION whenever index.html or the audio folder changes.
-const VERSION = 'komandy-es-v3';
+const VERSION = 'komandy-es-v2';
 const SHELL = ['./', './index.html', './manifest.webmanifest', './icons/icon-192.png', './icons/icon-512.png', './icons/apple-touch-icon.png', './audio/index.json'];
 
 self.addEventListener('install', e => {
