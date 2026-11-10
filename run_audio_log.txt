@@ -1,0 +1,205 @@
+==== 10.11.2026 23:26:39,86 ==== 
+--- diagnostics --- 
+Python313
+Lib
+Scripts
+INFO: Could not find files for the given pattern(s).
+INFO: Could not find files for the given pattern(s).
+------------------- 
+Installing Python with winget 
+The `msstore` source requires that you view the following agreements before using.
+Terms of Transaction: https://aka.ms/microsoft-store-terms-of-transaction
+The source requires the current machine's 2-letter geographic region to be sent to the backend service to function properly (ex. "US").
+
+Found Python 3.12 [Python.Python.3.12] Version 3.12.10
+This application is licensed to you by its owner.
+Microsoft is not responsible for, nor does it grant any licenses to, third-party packages.
+Downloading https://www.python.org/ftp/python/3.12.10/python-3.12.10-amd64.exe
+Successfully verified installer hash
+Starting package install...
+Successfully installed
+PYTHON=C:\Users\Semen\AppData\Local\Programs\Python\Python312\python.exe 
+Python 3.12.10
+Collecting edge-tts
+  Downloading edge_tts-7.3.1-py3-none-any.whl.metadata (6.1 kB)
+Collecting aiohttp<4.0.0,>=3.8.0 (from edge-tts)
+  Downloading aiohttp-3.14.5-cp312-cp312-win_amd64.whl.metadata (8.5 kB)
+Collecting certifi>=2023.11.17 (from edge-tts)
+  Downloading certifi-2026.10.23-py3-none-any.whl.metadata (2.5 kB)
+Collecting tabulate<1.0.0,>=0.4.4 (from edge-tts)
+  Downloading tabulate-0.10.0-py3-none-any.whl.metadata (40 kB)
+Collecting typing-extensions<5.0.0,>=4.1.0 (from edge-tts)
+  Downloading typing_extensions-4.16.0-py3-none-any.whl.metadata (3.3 kB)
+Collecting aiohappyeyeballs>=2.5.0 (from aiohttp<4.0.0,>=3.8.0->edge-tts)
+  Downloading aiohappyeyeballs-2.7.1-py3-none-any.whl.metadata (5.9 kB)
+Collecting aiosignal>=1.4.0 (from aiohttp<4.0.0,>=3.8.0->edge-tts)
+  Downloading aiosignal-1.4.0-py3-none-any.whl.metadata (3.7 kB)
+Collecting attrs>=17.3.0 (from aiohttp<4.0.0,>=3.8.0->edge-tts)
+  Downloading attrs-26.1.0-py3-none-any.whl.metadata (8.8 kB)
+Collecting frozenlist>=1.1.1 (from aiohttp<4.0.0,>=3.8.0->edge-tts)
+  Downloading frozenlist-1.8.0-cp312-cp312-win_amd64.whl.metadata (21 kB)
+Collecting multidict<8.0,>=4.5 (from aiohttp<4.0.0,>=3.8.0->edge-tts)
+  Downloading multidict-7.2.1-cp312-cp312-win_amd64.whl.metadata (6.3 kB)
+Collecting propcache>=0.2.0 (from aiohttp<4.0.0,>=3.8.0->edge-tts)
+  Downloading propcache-0.5.4-cp312-cp312-win_amd64.whl.metadata (25 kB)
+Collecting yarl<2.0,>=1.25.1 (from aiohttp<4.0.0,>=3.8.0->edge-tts)
+  Downloading yarl-1.25.1-cp312-cp312-win_amd64.whl.metadata (115 kB)
+Collecting idna>=2.0 (from yarl<2.0,>=1.25.1->aiohttp<4.0.0,>=3.8.0->edge-tts)
+  Downloading idna-3.20-py3-none-any.whl.metadata (7.2 kB)
+Downloading edge_tts-7.3.1-py3-none-any.whl (38 kB)
+Downloading aiohttp-3.14.5-cp312-cp312-win_amd64.whl (506 kB)
+Downloading certifi-2026.10.23-py3-none-any.whl (135 kB)
+Downloading tabulate-0.10.0-py3-none-any.whl (39 kB)
+Downloading typing_extensions-4.16.0-py3-none-any.whl (45 kB)
+Downloading aiohappyeyeballs-2.7.1-py3-none-any.whl (15 kB)
+Downloading aiosignal-1.4.0-py3-none-any.whl (7.5 kB)
+Downloading attrs-26.1.0-py3-none-any.whl (67 kB)
+Downloading frozenlist-1.8.0-cp312-cp312-win_amd64.whl (44 kB)
+Downloading multidict-7.2.1-cp312-cp312-win_amd64.whl (95 kB)
+Downloading propcache-0.5.4-cp312-cp312-win_amd64.whl (46 kB)
+Downloading yarl-1.25.1-cp312-cp312-win_amd64.whl (102 kB)
+Downloading idna-3.20-py3-none-any.whl (69 kB)
+Installing collected packages: typing-extensions, tabulate, propcache, multidict, idna, frozenlist, certifi, attrs, aiohappyeyeballs, yarl, aiosignal, aiohttp, edge-tts
+  WARNING: The script tabulate.exe is installed in 'C:\Users\Semen\AppData\Local\Programs\Python\Python312\Scripts' which is not on PATH.
+  Consider adding this directory to PATH or, if you prefer to suppress this warning, use --no-warn-script-location.
+  WARNING: The script idna.exe is installed in 'C:\Users\Semen\AppData\Local\Programs\Python\Python312\Scripts' which is not on PATH.
+  Consider adding this directory to PATH or, if you prefer to suppress this warning, use --no-warn-script-location.
+  WARNING: The scripts edge-playback.exe and edge-tts.exe are installed in 'C:\Users\Semen\AppData\Local\Programs\Python\Python312\Scripts' which is not on PATH.
+  Consider adding this directory to PATH or, if you prefer to suppress this warning, use --no-warn-script-location.
+Successfully installed aiohappyeyeballs-2.7.1 aiohttp-3.14.5 aiosignal-1.4.0 attrs-26.1.0 certifi-2026.10.23 edge-tts-7.3.1 frozenlist-1.8.0 idna-3.20 multidict-7.2.1 propcache-0.5.4 tabulate-0.10.0 typing-extensions-4.16.0 yarl-1.25.1
+OK    u1-2    ¡Desarme!
+OK    u1-4    ¡Atención!
+OK    u1-1    ¡Alto!
+OK    u1-3    ¡Aterrice ya!
+OK    u1-6    ¡Aléjese de las hélices!
+OK    u1-5    ¡Suba!
+OK    u1-7    ¡No se acerque!
+OK    u1-8    ¡No toque el dron!
+OK    u1-9    ¡Gente en la zona!
+OK    u1-10   ¡Desconecte la batería!
+OK    u1-12   ¡Échele arena!
+OK    u1-11   ¡Batería en llamas!
+OK    u1-13   ¡Sin video!
+OK    u1-14   ¡Sin señal!
+OK    u1-15   ¡Todos, desarmen!
+OK    u1-16   ¡Alto a los vuelos!
+OK    u1-17   ¡Alerta aérea!
+OK    u1-18   ¡A cubierto!
+OK    u2-1    Prepárense para el despegue
+OK    u2-2    Encienda el control
+OK    u2-4    Acelerador a cero
+OK    u2-3    ¿Switch de armado apagado?
+OK    u2-5    Ponga las hélices
+OK    u2-6    Revise que las hélices estén apretadas
+OK    u2-8    Póngase las gafas
+OK    u2-9    Revise el canal de video
+OK    u2-7    Revise el voltaje de la batería
+OK    u2-10   Conecte la batería
+OK    u2-11   ¿Tiene imagen?
+OK    u2-13   Dron a la zona de despegue
+OK    u2-12   ¿Tiene enlace?
+OK    u2-14   ¿Zona despejada?
+OK    u2-15   ¿Listo?
+OK    u2-16   Espere la orden
+OK    u3-1    ¡Arme!
+OK    u3-2    ¡Despegue!
+OK    u3-3    Suba
+OK    u3-4    Baje
+OK    u3-5    Mantenga la altura
+OK    u3-6    Más despacio
+OK    u3-7    Más rápido
+OK    u3-8    Acelerador más suave
+OK    u3-10   Atrás
+OK    u3-9    Adelante
+OK    u3-11   Gire a la izquierda
+OK    u3-12   Gire a la derecha
+OK    u3-13   Dé la vuelta
+OK    u3-14   Pase por la puerta
+OK    u3-15   Haga un círculo
+OK    u3-16   Haga un ocho
+OK    u3-17   Objetivo al frente
+OK    u3-19   Reviente el globo
+OK    u3-18   Mantenga el objetivo al centro
+OK    u3-20   Bien, siga así
+OK    u3-21   Una vuelta más
+OK    u3-22   Último intento
+OK    u3-24   Regrese
+OK    u3-23   Batería baja, aterrice
+OK    u3-25   Prepárese para aterrizar
+OK    u3-26   Aterrice
+OK    u3-27   Desarme
+OK    u4-1    Desarme y desconecte la batería
+OK    u4-2    Quítese las gafas
+OK    u4-3    Apague el control
+OK    u4-4    Traiga el dron
+OK    u4-5    Revise el dron
+OK    u4-6    Revise si las hélices están dañadas
+OK    u4-7    Revise la temperatura de los motores
+OK    u4-8    ¿Cuánto voltaje tiene?
+OK    u4-9    Quite las hélices
+OK    u4-10   Batería a cargar
+OK    u4-13   ¡El siguiente!
+OK    u4-12   Cambio de piloto
+OK    u4-11   Reporte: ¿qué pasó?
+OK    u5-1    Empezamos
+OK    u5-2    Reúnanse aquí
+OK    u5-3    Escuchen
+OK    u5-4    Mírenme
+OK    u5-5    Muéstreme
+OK    u5-6    Tomen los controles
+OK    u5-7    Bien
+OK    u5-8    Excelente
+OK    u5-9    Correcto
+OK    u5-10   Incorrecto
+OK    u5-11   Así
+OK    u5-12   Así no
+OK    u5-13   Otra vez
+OK    u5-14   Repita
+OK    u5-16   ¿Preguntas?
+OK    u5-15   ¿Entendido?
+OK    u5-17   Descanso de diez minutos
+OK    u6-1    Listo
+OK    u5-18   Fin de la clase
+OK    u6-2    Entendido
+OK    u6-3    No entiendo
+OK    u6-4    Repita, por favor
+OK    u6-6    ¿Puedo despegar?
+OK    u6-5    Más despacio, por favor
+OK    u6-7    Aterrizando
+OK    u6-9    No veo
+OK    u6-8    No tengo imagen
+OK    u6-10   Perdí la señal
+OK    u6-12   No arma
+OK    u6-11   Batería baja
+OK    u6-14   Choqué
+OK    u6-13   Se cayó
+OK    u6-15   Se rompió la hélice
+OK    u6-16   Tengo una pregunta
+OK    u7-1    cero
+OK    u7-2    uno
+OK    u7-5    cuatro
+OK    u7-3    dos
+OK    u7-4    tres
+OK    u7-6    cinco
+OK    u7-7    seis
+OK    u7-8    siete
+OK    u7-9    ocho
+OK    u7-10   nueve
+OK    u7-11   diez
+OK    u7-12   veinte
+OK    u7-13   treinta
+OK    u7-14   cincuenta
+OK    u7-15   cien
+OK    u7-16   A las doce
+OK    u7-17   A las tres
+OK    u7-18   A las seis
+OK    u7-19   A las nueve
+OK    u7-20   Altura veinte metros
+OK    u7-21   Canal cinco
+OK    u7-22   Quedan dos minutos
+OK    u7-23   Tres coma siete voltios
+OK    u7-24   Tres, dos, uno, ¡despegue!
+
+Done: 132 of 132 files in 'audio/'.
+SCRIPT_EXIT=0 
+==== FINISHED ==== 

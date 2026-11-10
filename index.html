@@ -156,7 +156,7 @@ input[type=range]{width:100%;accent-color:var(--go)}
 <noscript>Увімкніть JavaScript, щоб користуватися застосунком.</noscript>
 <script>
 'use strict';
-const VERSION = '1.0 · 10.11.2026';
+const VERSION = '1.1 · 10.11.2026';
 
 /* ---------- CONTENT: from the cheat sheet. Format: [Ukrainian, Spanish, pronunciation]. "+" marks the stressed vowel. ---------- */
 const U = [
@@ -342,6 +342,7 @@ function bumpStreak() { const t = today(); if (S.lastDay === t) return; S.streak
 /* ---------- audio: native recordings > bundled files > device voice ---------- */
 const CLIPS = new Map();   // id -> object URL (recorded on this device)
 let BUNDLE = {};           // id -> file name in ./audio/
+const BUNDLE_URL = new Map(); // id -> object URL of a preloaded bundled file
 let voices = [];
 let curAudio = null;
 const DB = {
@@ -363,7 +364,7 @@ function esVoice() {
  for (const p of ['es-mx', 'es-us', 'es-419', 'es-co']) { const f = vs.filter(v => v.lang.replace('_', '-').toLowerCase() === p).sort((a, b) => q(a) - q(b))[0]; if (f) return f; }
  return vs.find(v => !/es[-_]es/i.test(v.lang)) || vs[0];
 }
-const audioPossible = id => CLIPS.has(id) || !!BUNDLE[id] || !!esVoice();
+const audioPossible = id => CLIPS.has(id) || BUNDLE_URL.has(id) || !!BUNDLE[id] || !!esVoice();
 function stopAudio() { try { if (curAudio) { curAudio.pause(); curAudio = null; } if ('speechSynthesis' in window) speechSynthesis.cancel(); } catch (e) {} }
 function playFile(src, slow) { const a = new Audio(src); a.playbackRate = slow ? 0.7 : 1; curAudio = a; a.play().catch(() => {}); }
 function speak(text, slow) {
@@ -374,6 +375,7 @@ function speak(text, slow) {
 function play(id, slow, quiet) {
  stopAudio();
  if (CLIPS.has(id)) return playFile(CLIPS.get(id), slow);
+ if (BUNDLE_URL.has(id)) return playFile(BUNDLE_URL.get(id), slow);
  if (BUNDLE[id]) return playFile('audio/' + BUNDLE[id], slow);
  if (!speak(ITEMS[id].es, slow) && !quiet) toast('На цьому пристрої немає іспанського голосу. Див. «Налаштування».');
 }
@@ -696,6 +698,13 @@ async function importClips(file) {
  } catch (e) { toast('Не вдалося прочитати файл'); }
 }
 
+// Load bundled audio into memory: instant playback on iPhone and no dependence on media range requests offline.
+async function preloadBundle() {
+ const ids = Object.keys(BUNDLE).filter(id => ITEMS[id]);
+ const work = async () => { while (ids.length) { const id = ids.shift(); try { const r = await fetch('audio/' + BUNDLE[id]); if (r.ok) BUNDLE_URL.set(id, URL.createObjectURL(await r.blob())); } catch (e) {} } };
+ await Promise.all([work(), work(), work(), work()]);
+}
+
 /* ---------- actions & start ---------- */
 Object.assign(ACT, {
  home, settings: showSettings, rec: showRec, review: startReview, reflex: startReflex,
@@ -709,7 +718,8 @@ home();
  await DB.open();
  try { (await DB.all()).forEach(([id, v]) => { if (v && v.blob) setClip(id, v.blob); }); } catch (e) {}
  try { const r = await fetch('audio/index.json', {cache: 'no-cache'}); if (r.ok) BUNDLE = await r.json(); } catch (e) {}
- try { if ('serviceWorker' in navigator && location.protocol === 'https:' && window.top === window.self) navigator.serviceWorker.register('sw.js').catch(() => {}); } catch (e) {}
+ preloadBundle();
+ try { if ('serviceWorker' in navigator && window.isSecureContext && window.top === window.self) navigator.serviceWorker.register('sw.js').catch(() => {}); } catch (e) {}
 })();
 </script>
 </body>
