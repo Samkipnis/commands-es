@@ -1,9 +1,19 @@
-// Offline cache for "Команди ES". Bump VERSION whenever index.html or audio changes.
-const VERSION = 'komandy-es-v1';
-const SHELL = ['./', './index.html', './manifest.webmanifest', './icons/icon-192.png', './icons/icon-512.png', './icons/apple-touch-icon.png'];
+// Offline cache for "Команди ES". Bump VERSION whenever index.html or the audio folder changes.
+const VERSION = 'komandy-es-v2';
+const SHELL = ['./', './index.html', './manifest.webmanifest', './icons/icon-192.png', './icons/icon-512.png', './icons/apple-touch-icon.png', './audio/index.json'];
 
 self.addEventListener('install', e => {
-  e.waitUntil(caches.open(VERSION).then(c => c.addAll(SHELL)).then(() => self.skipWaiting()));
+  e.waitUntil((async () => {
+    const cache = await caches.open(VERSION);
+    await cache.addAll(SHELL);
+    // Pre-cache every bundled audio file listed in audio/index.json, so audio works offline from day one.
+    try {
+      const index = await (await cache.match('./audio/index.json')).json();
+      const files = [...new Set(Object.values(index))].map(f => './audio/' + f);
+      for (let i = 0; i < files.length; i += 10) await cache.addAll(files.slice(i, i + 10));
+    } catch (err) { /* no bundled audio yet */ }
+    await self.skipWaiting();
+  })());
 });
 
 self.addEventListener('activate', e => {
