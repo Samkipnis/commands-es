@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Команди іспанською</title>
+<meta name="description" content="Тренажер команд інструктора FPV іспанською мовою">
+<meta name="theme-color" content="#5D6352">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Команди ES">
+<meta name="mobile-web-app-capable" content="yes">
+<style>
+:root{--bg:#F4F5F1;--card:#fff;--ink:#15170F;--muted:#62675A;--line:#D8DBD0;--olive:#5D6352;--go:#6F8F3A;--go-d:#56712B;--good:#4E7A2E;--good-bg:#E9F2DC;--bad:#B3261E;--bad-d:#7D1A15;--bad-bg:#FBE7E4;--sel:#2F6FA6;--sel-d:#1F4F78;--sel-bg:#E5EFF8;--amber:#D0841C;color-scheme:light}
+@media (prefers-color-scheme:dark){:root{--bg:#121410;--card:#1C1F18;--ink:#E8EBE2;--muted:#A0A595;--line:#343A2D;--good:#8DBA5C;--good-bg:#22301A;--bad-bg:#3A1C18;--sel:#5B9BD5;--sel-bg:#1A2836;color-scheme:dark}}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--ink)}
+body{font-family:Bahnschrift,"Segoe UI",Roboto,-apple-system,system-ui,sans-serif;-webkit-tap-highlight-color:transparent;-webkit-text-size-adjust:100%;line-height:1.35}
+button{font:inherit;color:inherit;cursor:pointer;-webkit-user-select:none;user-select:none}
+#app{max-width:560px;margin:0 auto;min-height:100vh;min-height:100dvh;display:flex;flex-direction:column}
+.top{position:sticky;top:0;z-index:5;display:flex;align-items:center;gap:12px;padding:calc(10px + env(safe-area-inset-top)) 14px 10px;background:var(--bg);border-bottom:2px solid var(--line)}
+.brand{flex:1;font-weight:700;font-size:18px;letter-spacing:.02em}
+.brand b{color:var(--go)}
+.top.sub .brand{text-align:center}
+.stat{display:flex;align-items:center;gap:4px;font-weight:700;font-size:17px}
+.stat svg{width:22px;height:22px}
+.stat.fire{color:var(--amber)}.stat.fire.off{color:var(--muted)}
+.stat.xp{color:var(--go)}
+.icon{background:none;border:0;padding:6px;display:flex;color:var(--muted)}
+.icon svg{width:24px;height:24px}
+.x{background:none;border:0;font-size:22px;line-height:1;color:var(--muted);padding:6px 8px;min-width:40px}
+.inst{background:var(--go);color:#fff;border:0;border-radius:10px;padding:6px 10px;font-weight:700;font-size:13px}
+.home{padding:16px 16px 48px}
+.review{display:flex;align-items:center;gap:12px;width:100%;padding:14px 16px;border:2px solid var(--line);border-radius:16px;background:var(--card);box-shadow:0 4px 0 var(--line);margin-bottom:22px;text-align:left}
+.review svg{width:28px;height:28px;color:var(--sel);flex:none}
+.review b{display:block;font-size:17px}
+.review span{color:var(--muted);font-size:14px}
+.review .cnt{margin-left:auto;background:var(--sel);color:#fff;border-radius:999px;padding:2px 10px;font-weight:700;font-size:15px}
+.unit{margin-bottom:30px}
+.ubanner{display:flex;align-items:center;justify-content:space-between;gap:12px;background:var(--uc);color:#fff;border-radius:16px;padding:14px 16px;box-shadow:0 4px 0 rgba(0,0,0,.25)}
+.unum{font-size:12px;opacity:.85;text-transform:uppercase;letter-spacing:.08em;font-weight:700}
+.ubanner h2{margin:2px 0;font-size:21px}
+.usub{font-size:14px;opacity:.92}
+.ulist{background:rgba(255,255,255,.18);border:2px solid rgba(255,255,255,.4);border-radius:12px;color:#fff;padding:8px;display:flex;flex:none}
+.ulist svg{width:22px;height:22px}
+.path{display:flex;flex-direction:column;align-items:center;gap:36px;padding:46px 0 34px}
+.nw{position:relative}
+.node{position:relative;width:72px;height:66px;border-radius:50%;border:0;background:var(--line);color:var(--muted);font-size:24px;font-weight:700;box-shadow:0 6px 0 rgba(0,0,0,.18);display:flex;align-items:center;justify-content:center}
+.node:active{transform:translateY(4px);box-shadow:0 2px 0 rgba(0,0,0,.18)}
+.node.done{background:var(--uc);color:#fff}
+.node.cur{background:var(--uc);color:#fff;box-shadow:0 6px 0 rgba(0,0,0,.25),0 0 0 6px var(--bg),0 0 0 10px var(--uc)}
+.node svg{width:30px;height:30px}
+.node.reflex{background:var(--bad);color:#fff}
+.start{position:absolute;top:-34px;left:50%;transform:translateX(-50%);background:var(--card);color:var(--uc);border:2px solid var(--line);border-radius:10px;padding:3px 10px;font-size:13px;font-weight:700;white-space:nowrap;animation:bob 1.6s ease-in-out infinite;pointer-events:none}
+@keyframes bob{50%{transform:translate(-50%,-4px)}}
+.lbl{position:absolute;top:74px;left:50%;transform:translateX(-50%);font-size:12px;color:var(--muted);white-space:nowrap}
+.uprog{text-align:center;color:var(--muted);font-size:13px;margin-top:4px}
+.foot-note{text-align:center;color:var(--muted);font-size:13px}
+.lesson{display:flex;flex-direction:column;min-height:100vh;min-height:100dvh}
+.lbar{display:flex;align-items:center;gap:8px;padding:calc(12px + env(safe-area-inset-top)) 12px 6px}
+.prog{flex:1;height:14px;background:var(--line);border-radius:8px;overflow:hidden}
+.prog i{display:block;height:100%;background:var(--go);border-radius:8px;transition:width .35s}
+.ex{flex:1;padding:12px 18px 18px;display:flex;flex-direction:column;gap:14px}
+.kicker{font-size:20px;font-weight:700}
+.kicker.new{color:var(--sel)}.kicker.red{color:var(--bad)}
+.prompt{font-size:24px;font-weight:700;padding:14px 16px;border:2px solid var(--line);border-radius:16px;background:var(--card)}
+.prompt.big{font-size:30px;text-align:center}
+.card{background:var(--card);border:2px solid var(--line);border-radius:18px;padding:18px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:6px}
+.es{font-size:30px;font-weight:700;line-height:1.2}
+.es.sm{font-size:22px;text-align:center}
+.pr{font-size:20px;color:var(--sel)}
+.ua{font-size:18px;color:var(--muted);margin-top:4px}
+.play{width:48px;height:48px;border-radius:14px;border:0;background:var(--sel);color:#fff;box-shadow:0 4px 0 var(--sel-d);display:inline-flex;align-items:center;justify-content:center;flex:none}
+.play:active{transform:translateY(2px);box-shadow:0 2px 0 var(--sel-d)}
+.play.big{width:84px;height:84px;border-radius:22px}
+.play svg{width:26px;height:26px}.play.big svg{width:44px;height:44px}
+.slow{background:none;border:2px solid var(--line);border-radius:10px;padding:6px 12px;color:var(--muted);font-size:14px}
+.listen{display:flex;flex-direction:column;align-items:center;gap:10px;padding:8px 0}
+.opts{display:flex;flex-direction:column;gap:10px}
+.opt{display:flex;flex-direction:column;align-items:flex-start;gap:2px;text-align:left;padding:13px 16px;border:2px solid var(--line);border-radius:14px;background:var(--card);box-shadow:0 3px 0 var(--line);font-size:19px}
+.o-es{font-weight:700}.o-pr{font-size:14px;color:var(--muted)}
+.opt.sel{border-color:var(--sel);background:var(--sel-bg);box-shadow:0 3px 0 var(--sel)}
+.opt.right{border-color:var(--good);background:var(--good-bg);box-shadow:0 3px 0 var(--good)}
+.opt.wrong{border-color:var(--bad);background:var(--bad-bg);box-shadow:0 3px 0 var(--bad)}
+.opt:disabled{cursor:default}
+.ansarea{min-height:112px;border-top:2px solid var(--line);border-bottom:2px solid var(--line);padding:10px 0;display:flex;flex-wrap:wrap;align-content:flex-start;gap:8px}
+.bank{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;padding-top:6px}
+.tile{padding:10px 14px;border:2px solid var(--line);border-radius:12px;background:var(--card);box-shadow:0 3px 0 var(--line);font-size:19px}
+.tile.used{background:var(--line);color:transparent;box-shadow:none}
+.lfoot{position:sticky;bottom:0;padding:12px 16px calc(14px + env(safe-area-inset-bottom));border-top:2px solid var(--line);background:var(--bg)}
+.lfoot.flat{border-top-color:transparent}
+.btn{display:block;width:100%;padding:15px;border:0;border-radius:14px;background:var(--go);color:#fff;font-weight:700;font-size:17px;letter-spacing:.04em;text-transform:uppercase;box-shadow:0 4px 0 var(--go-d);text-align:center}
+.btn:active{transform:translateY(2px);box-shadow:0 2px 0 var(--go-d)}
+.btn:disabled{background:var(--line);color:var(--muted);box-shadow:none;transform:none}
+.btn.red{background:var(--bad);box-shadow:0 4px 0 var(--bad-d)}
+.btn.ghost{background:var(--card);color:var(--ink);border:2px solid var(--line);box-shadow:0 4px 0 var(--line)}
+.btn.small{padding:11px;font-size:15px}
+.sheet{margin:-12px -16px calc(-14px - env(safe-area-inset-bottom));padding:14px 16px calc(16px + env(safe-area-inset-bottom));display:flex;flex-direction:column;gap:8px}
+.sheet.good{background:var(--good-bg)}.sheet.bad{background:var(--bad-bg)}
+.sh-t{font-size:21px;font-weight:700}
+.good .sh-t{color:var(--good)}.bad .sh-t{color:var(--bad)}
+.sh-a{font-size:18px;font-weight:700}
+.sh-a small{display:block;font-weight:400;color:var(--muted);font-size:15px}
+.sh-n{color:var(--bad);font-weight:700}
+.timer{height:10px;background:var(--line);border-radius:6px;overflow:hidden}
+.timer i{display:block;height:100%;width:100%;background:var(--bad)}
+.micwrap{display:flex;flex-direction:column;align-items:center;gap:10px;padding-top:4px}
+.mic{width:92px;height:92px;border-radius:50%;border:0;background:var(--go);color:#fff;box-shadow:0 6px 0 var(--go-d);display:flex;align-items:center;justify-content:center}
+.mic svg{width:42px;height:42px}
+.mic.on{background:var(--bad);box-shadow:0 6px 0 var(--bad-d);animation:pulse 1s infinite}
+@keyframes pulse{50%{transform:scale(1.06)}}
+.heard{color:var(--muted);text-align:center;min-height:1.4em}
+.link{background:none;border:0;color:var(--sel);text-decoration:underline;align-self:center;font-size:15px;padding:6px}
+.hint{color:var(--muted);text-align:center;margin:0}
+.result{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;padding:24px 20px calc(24px + env(safe-area-inset-bottom));text-align:center}
+.result h1{margin:0;font-size:26px}
+.trophy{width:100px;height:100px;border-radius:50%;background:var(--go);color:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 0 var(--go-d)}
+.trophy svg{width:54px;height:54px}
+.kpis{display:flex;gap:10px;width:100%;max-width:420px}
+.kpi{flex:1;border:2px solid var(--line);border-radius:14px;padding:12px 6px;background:var(--card)}
+.kpi b{display:block;font-size:24px}.kpi span{font-size:13px;color:var(--muted)}
+.result .btn{max-width:420px}
+.list{padding:8px 16px 48px}
+.row{display:flex;align-items:center;gap:12px;padding:10px 4px;border-bottom:1px solid var(--line)}
+.rtxt{flex:1;min-width:0}
+.r-es{font-weight:700;font-size:18px}.r-pr{color:var(--sel);font-size:15px}.r-ua{color:var(--muted);font-size:14px}
+.uh{margin:24px 0 4px;font-size:16px}
+.recb{width:46px;height:46px;border-radius:50%;border:2px solid var(--bad);background:var(--card);color:var(--bad);font-size:17px;flex:none}
+.recb.on{background:var(--bad);color:#fff}
+.row.recording{background:var(--bad-bg)}
+.del{background:none;border:0;color:var(--muted);font-size:18px;padding:6px}
+.tag{color:var(--muted);padding:0 8px}
+.set{padding:12px 16px 48px;display:flex;flex-direction:column;gap:14px}
+.box{background:var(--card);border:2px solid var(--line);border-radius:16px;padding:14px 16px;display:flex;flex-direction:column;gap:10px}
+.box h3{margin:0;font-size:18px}
+.box p{margin:0}
+select{font:inherit;padding:10px;border-radius:10px;border:2px solid var(--line);background:var(--bg);color:var(--ink);width:100%}
+.rng{display:flex;flex-direction:column;gap:6px}
+input[type=range]{width:100%;accent-color:var(--go)}
+.sw{display:flex;align-items:center;gap:10px}
+.sw input{width:22px;height:22px;accent-color:var(--go);flex:none}
+.note{color:var(--muted);font-size:14px}
+.warn{color:var(--bad);font-size:14px}
+.how{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:6px;font-size:15px}
+.row2{display:flex;gap:10px}.row2 > *{flex:1}
+.red-t{color:var(--bad)!important}
+.ver{text-align:center;color:var(--muted);font-size:13px}
+.toast{position:fixed;left:50%;bottom:calc(96px + env(safe-area-inset-bottom));transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:12px;font-size:15px;z-index:50;width:max-content;max-width:90vw;text-align:center;box-shadow:0 6px 20px rgba(0,0,0,.25)}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<noscript>Увімкніть JavaScript, щоб користуватися застосунком.</noscript>
+<script>
+'use strict';
+const VERSION = '1.0 · 10.11.2026';
+
+/* ---------- CONTENT: from the cheat sheet. Format: [Ukrainian, Spanish, pronunciation]. "+" marks the stressed vowel. ---------- */
+const U = [
+ {t:'Безпека', s:'Аварійні команди', c:'#B3261E', items:[
+  ['Стоп! / Зупинись!','¡Alto!','а+льто'],
+  ['Дізарм!','¡Desarme!','деса+рме'],
+  ['Негайна посадка!','¡Aterrice ya!','атеррі+се я'],
+  ['Увага!','¡Atención!','атенсьо+н'],
+  ['Набери висоту!','¡Suba!','су+ба'],
+  ['Відійди від пропелерів!','¡Aléjese de las hélices!','але+хесе де лас е+лісес'],
+  ['Не підходь!','¡No se acerque!','но се асе+рке'],
+  ['Не чіпай дрон!','¡No toque el dron!','но то+ке ель дрон'],
+  ['Люди на полі!','¡Gente en la zona!','хе+нте ен ла со+на'],
+  ["Від'єднай акумулятор!",'¡Desconecte la batería!','десконе+кте ла батері+я'],
+  ['Акумулятор горить!','¡Batería en llamas!','батері+я ен я+мас'],
+  ['Засипай піском!','¡Échele arena!','е+челе аре+на'],
+  ['Втрата відео!','¡Sin video!','сін бі+део'],
+  ["Втрата зв'язку!",'¡Sin señal!','сін сенья+ль'],
+  ['Всі — дізарм!','¡Todos, desarmen!','то+дос, деса+рмен'],
+  ['Польоти зупинено!','¡Alto a los vuelos!','а+льто а лос буе+лос'],
+  ['Повітряна тривога!','¡Alerta aérea!','але+рта ае+реа'],
+  ['Укриття!','¡A cubierto!',"а куб'є+рто"]]},
+ {t:'Підготовка', s:'Перед вильотом', c:'#5D6352', items:[
+  ['Готуйтеся до вильоту','Prepárense para el despegue','препа+ренсе па+ра ель деспе+ґе'],
+  ['Увімкни пульт','Encienda el control',"енс'є+нда ель контро+ль"],
+  ['Тумблер ARM вимкнений?','¿Switch de armado apagado?','сві+тч де арма+до апаґа+до'],
+  ['Газ на нуль','Acelerador a cero','аселерадо+р а се+ро'],
+  ['Встанови пропелери','Ponga las hélices','по+нґа лас е+лісес'],
+  ['Перевір затяжку пропелерів','Revise que las hélices estén apretadas','ребі+се ке лас е+лісес есте+н апрета+дас'],
+  ['Перевір напругу акумулятора','Revise el voltaje de la batería','ребі+се ель больта+хе де ла батері+я'],
+  ['Надінь окуляри','Póngase las gafas','по+нґасе лас ґа+фас'],
+  ['Перевір канал відео','Revise el canal de video','ребі+се ель кана+ль де бі+део'],
+  ['Підключи акумулятор','Conecte la batería','коне+кте ла батері+я'],
+  ['Є картинка?','¿Tiene imagen?',"т'є+не іма+хен"],
+  ["Є зв'язок?",'¿Tiene enlace?',"т'є+не енла+се"],
+  ['Дрон на старт','Dron a la zona de despegue','дрон а ла со+на де деспе+ґе'],
+  ['Зона чиста?','¿Zona despejada?','со+на деспеха+да'],
+  ['Готовий?','¿Listo?','лі+сто'],
+  ['Чекай команди','Espere la orden','еспе+ре ла о+рден']]},
+ {t:'У польоті', s:'Від армінгу до дізарму', c:'#2F6FA6', items:[
+  ['Армінг','¡Arme!','а+рме'],
+  ['Зліт','¡Despegue!','деспе+ґе'],
+  ['Вгору','Suba','су+ба'],
+  ['Вниз','Baje','ба+хе'],
+  ['Тримай висоту','Mantenga la altura','манте+нґа ла альту+ра'],
+  ['Повільніше','Más despacio','мас деспа+сьо'],
+  ['Швидше','Más rápido','мас рра+підо'],
+  ['Плавніше газ','Acelerador más suave','аселерадо+р мас суа+бе'],
+  ['Вперед','Adelante','адела+нте'],
+  ['Назад','Atrás','атра+с'],
+  ['Поворот ліворуч','Gire a la izquierda',"хі+ре а ла іск'є+рда"],
+  ['Поворот праворуч','Gire a la derecha','хі+ре а ла дере+ча'],
+  ['Розворот','Dé la vuelta','де ла буе+льта'],
+  ['Пройди через ворота','Pase por la puerta','па+се пор ла пуе+рта'],
+  ['Облети по колу','Haga un círculo','а+ґа ун сі+ркуло'],
+  ['Вісімка','Haga un ocho','а+ґа ун о+чо'],
+  ['Ціль попереду','Objetivo al frente','обхеті+бо аль фре+нте'],
+  ['Тримай ціль у центрі','Mantenga el objetivo al centro','манте+нґа ель обхеті+бо аль се+нтро'],
+  ['Урази кулю','Reviente el globo',"реб'є+нте ель ґло+бо"],
+  ['Добре, тримай так','Bien, siga así',"б'єн, сі+ґа асі+"],
+  ['Ще одне коло','Una vuelta más','у+на буе+льта мас'],
+  ['Остання спроба','Último intento','у+льтімо інте+нто'],
+  ['Низький заряд — на посадку','Batería baja, aterrice','батері+я ба+ха, атеррі+се'],
+  ['Повертайся','Regrese','реґре+се'],
+  ['Готуйся до посадки','Prepárese para aterrizar','препа+ресе па+ра атерріса+р'],
+  ['Посадка','Aterrice','атеррі+се'],
+  ['Дізарм','Desarme','деса+рме']]},
+ {t:'Після польоту', s:'Огляд і зміна пілота', c:'#7A5A2E', items:[
+  ["Дізарм і від'єднай акумулятор",'Desarme y desconecte la batería','деса+рме і десконе+кте ла батері+я'],
+  ['Зніми окуляри','Quítese las gafas','кі+тесе лас ґа+фас'],
+  ['Вимкни пульт','Apague el control','апа+ґе ель контро+ль'],
+  ['Принеси дрон','Traiga el dron','тра+йґа ель дрон'],
+  ['Оглянь дрон','Revise el dron','ребі+се ель дрон'],
+  ['Перевір, чи цілі пропелери','Revise si las hélices están dañadas','ребі+се сі лас е+лісес еста+н даня+дас'],
+  ['Перевір температуру моторів','Revise la temperatura de los motores','ребі+се ла температу+ра де лос мото+рес'],
+  ['Яка напруга?','¿Cuánto voltaje tiene?',"куа+нто больта+хе т'є+не"],
+  ['Зніми пропелери','Quite las hélices','кі+те лас е+лісес'],
+  ['Акумулятор на зарядку','Batería a cargar','батері+я а карґа+р'],
+  ['Доповідай: що сталося?','Reporte: ¿qué pasó?','репо+рте: ке пасо+'],
+  ['Зміна пілота','Cambio de piloto','ка+мбйо де піло+то'],
+  ['Наступний!','¡El siguiente!',"ель сіґ'є+нте"]]},
+ {t:'Заняття', s:'Клас і оцінка', c:'#6B4E8C', items:[
+  ['Починаємо','Empezamos','емпеса+мос'],
+  ['Збір тут','Reúnanse aquí','реу+нансе акі+'],
+  ['Слухайте','Escuchen','еску+чен'],
+  ['Дивіться на мене','Mírenme','мі+ренме'],
+  ['Покажи','Muéstreme','муе+стреме'],
+  ['Беріть пульти','Tomen los controles','то+мен лос контро+лес'],
+  ['Добре','Bien',"б'єн"],
+  ['Відмінно','Excelente','екселе+нте'],
+  ['Правильно','Correcto','корре+кто'],
+  ['Неправильно','Incorrecto','інкорре+кто'],
+  ['Ось так','Así','асі+'],
+  ['Не так','Así no','асі+ но'],
+  ['Ще раз','Otra vez','о+тра бес'],
+  ['Повтори','Repita','репі+та'],
+  ['Зрозуміло?','¿Entendido?','ентенді+до'],
+  ['Питання є?','¿Preguntas?','преґу+нтас'],
+  ['Перерва 10 хвилин','Descanso de diez minutos',"деска+нсо де д'єс міну+тос"],
+  ['Кінець заняття','Fin de la clase','фін де ла кла+се']]},
+ {t:'Курсант відповідає', s:'Розуміти на слух', c:'#2E7A6E', dir:'es2ua', items:[
+  ['Готовий','Listo','лі+сто'],
+  ['Зрозумів','Entendido','ентенді+до'],
+  ['Не розумію','No entiendo',"но ент'є+ндо"],
+  ['Повторіть, будь ласка','Repita, por favor','репі+та, пор фабо+р'],
+  ['Повільніше, будь ласка','Más despacio, por favor','мас деспа+сьо, пор фабо+р'],
+  ['Можна злітати?','¿Puedo despegar?','пуе+до деспеґа+р'],
+  ['Сідаю','Aterrizando','атерріса+ндо'],
+  ['Немає картинки','No tengo imagen','но те+нґо іма+хен'],
+  ['Не бачу','No veo','но бе+о'],
+  ["Втратив зв'язок",'Perdí la señal','перді+ ла сенья+ль'],
+  ['Низький заряд','Batería baja','батері+я ба+ха'],
+  ['Не армиться','No arma','но а+рма'],
+  ['Впав','Se cayó','се кайо+'],
+  ['Врізався','Choqué','чоке+'],
+  ['Зламався пропелер','Se rompió la hélice',"се ромп'йо+ ла е+лісе"],
+  ['Маю питання','Tengo una pregunta','те+нґо у+на преґу+нта']]},
+ {t:'Числа і напрямки', s:'Рахунок, години, напруга', c:'#8A6D1E', items:[
+  ['0','cero','се+ро'],['1','uno','у+но'],['2','dos','дос'],['3','tres','трес'],['4','cuatro','куа+тро'],
+  ['5','cinco','сі+нко'],['6','seis','сейс'],['7','siete',"с'є+те"],['8','ocho','о+чо'],['9','nueve','нуе+бе'],
+  ['10','diez',"д'єс"],['20','veinte','бе+йнте'],['30','treinta','тре+йнта'],['50','cincuenta','сінкуе+нта'],['100','cien',"с'єн"],
+  ['На 12 (прямо)','A las doce','а лас до+се'],
+  ['На 3 (праворуч)','A las tres','а лас трес'],
+  ['На 6 (позаду)','A las seis','а лас сейс'],
+  ['На 9 (ліворуч)','A las nueve','а лас нуе+бе'],
+  ['Висота 20 метрів','Altura veinte metros','альту+ра бе+йнте ме+трос'],
+  ['Канал 5','Canal cinco','кана+ль сі+нко'],
+  ['Залишилось 2 хвилини','Quedan dos minutos','ке+дан дос міну+тос'],
+  ['3,7 вольта','Tres coma siete voltios',"трес ко+ма с'є+те бо+льтйос"],
+  ['Три, два, один — зліт!','Tres, dos, uno, ¡despegue!','трес, дос, у+но, деспе+ґе']]}
+];
+
+/* ---------- helpers ---------- */
+const $ = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+const app = $('#app');
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const shuffle = a => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.random() * (i + 1) | 0; [a[i], a[j]] = [a[j], a[i]]; } return a; };
+const sample = (a, n) => shuffle(a).slice(0, n);
+const NUM = {0:'cero',1:'uno',2:'dos',3:'tres',4:'cuatro',5:'cinco',6:'seis',7:'siete',8:'ocho',9:'nueve',10:'diez',12:'doce',20:'veinte',30:'treinta',50:'cincuenta',100:'cien'};
+const numWords = s => s.replace(/(\d+)[,.](\d+)/g, (m, a, b) => `${NUM[+a] || a} coma ${NUM[+b] || b}`).replace(/\d+/g, d => NUM[+d] || d);
+const norm = s => numWords(String(s)).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[¡!¿?.,:;—–\-\/"«»()]/g, ' ').replace(/\s+/g, ' ').trim();
+const words = s => s.replace(/[¡!¿?.,:;—]/g, ' ').split(/\s+/).filter(Boolean);
+function sim(a, b) { if (a === b) return 1; const m = a.length, n = b.length; if (!m || !n) return 0; let p = Array.from({length: n + 1}, (_, j) => j); for (let i = 1; i <= m; i++) { const c = [i]; for (let j = 1; j <= n; j++) c[j] = Math.min(p[j] + 1, c[j - 1] + 1, p[j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1)); p = c; } return 1 - p[n] / Math.max(m, n); }
+const pad = n => String(n).padStart(2, '0');
+const dayStr = d => `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
+const today = () => dayStr(new Date());
+const addDays = (s, n) => { const [y, m, d] = s.split('-').map(Number); return dayStr(new Date(y, m - 1, d + n)); };
+
+const ICON = {
+ spk:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H3v6h3l5 4z" fill="currentColor"/><path d="M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13"/></svg>',
+ mic:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="9" y="3" width="6" height="11" rx="3" fill="currentColor"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg>',
+ check:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>',
+ fire:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c1 3.5 5.5 6 5.5 11a5.5 5.5 0 0 1-11 0c0-2.6 1.4-4.3 2.6-5.4.1 1.9 1 3 2.2 3.4C11 8.5 10.8 5.2 12 2z"/></svg>',
+ bolt:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4 14h6.5L9 22l11-13h-7z"/></svg>',
+ gear:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h9M17 6h3M4 12h3M11 12h9M4 18h11M19 18h1"/><circle cx="15" cy="6" r="2"/><circle cx="9" cy="12" r="2"/><circle cx="17" cy="18" r="2"/></svg>',
+ list:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6h11M9 12h11M9 18h11"/><circle cx="4.5" cy="6" r="1" fill="currentColor"/><circle cx="4.5" cy="12" r="1" fill="currentColor"/><circle cx="4.5" cy="18" r="1" fill="currentColor"/></svg>',
+ rep:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 11a8 8 0 1 0-2.3 5.7M20 4v7h-7"/></svg>'
+};
+
+/* ---------- items ---------- */
+const ITEMS = {};
+function chunk(ids) { const n = Math.ceil(ids.length / 6), out = []; let k = 0; for (let i = 0; i < n; i++) { const sz = Math.floor(ids.length / n) + (i < ids.length % n ? 1 : 0); out.push(ids.slice(k, k + sz)); k += sz; } return out; }
+const UNITS = U.map((u, ui) => {
+ const ids = u.items.map((x, i) => { const id = `u${ui + 1}-${i + 1}`; ITEMS[id] = {id, ua: x[0], es: x[1], pr: x[2].replace(/\+/g, '́'), u: ui, dir: u.dir || 'ua2es'}; return id; });
+ return {...u, ids, lessons: chunk(ids)};
+});
+
+/* ---------- state ---------- */
+const KEY = 'komES.v1';
+const defState = () => ({xp: 0, streak: 0, lastDay: null, items: {}, done: {}, micOffUntil: 0, settings: {mic: true, sfx: true, rate: 0.9, voice: ''}});
+function load() { try { const s = JSON.parse(localStorage.getItem(KEY)); if (s) { const d = defState(); return {...d, ...s, settings: {...d.settings, ...(s.settings || {})}}; } } catch (e) {} return defState(); }
+let S = load();
+function save() { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} }
+const INT = [0, 1, 2, 4, 7, 15, 30];
+const st = id => S.items[id] || (S.items[id] = {box: 0, due: null, seen: false});
+function markSeen(id) { const s = st(id); if (!s.seen) { s.seen = true; s.due = addDays(today(), 1); } }
+function dueItems() { const t = today(); return Object.keys(ITEMS).filter(id => { const s = S.items[id]; return s && s.seen && s.due && s.due <= t; }); }
+function seenItems() { return Object.keys(ITEMS).filter(id => S.items[id] && S.items[id].seen); }
+function shownStreak() { const t = today(); return (S.lastDay === t || S.lastDay === addDays(t, -1)) ? S.streak : 0; }
+function bumpStreak() { const t = today(); if (S.lastDay === t) return; S.streak = S.lastDay === addDays(t, -1) ? S.streak + 1 : 1; S.lastDay = t; }
+
+/* ---------- audio: native recordings > bundled files > device voice ---------- */
+const CLIPS = new Map();   // id -> object URL (recorded on this device)
+let BUNDLE = {};           // id -> file name in ./audio/
+let voices = [];
+let curAudio = null;
+const DB = {
+ db: null,
+ open() { return new Promise(res => { try { const r = indexedDB.open('komES', 1); r.onupgradeneeded = () => r.result.createObjectStore('clips'); r.onsuccess = () => { DB.db = r.result; res(); }; r.onerror = () => res(); } catch (e) { res(); } }); },
+ req(mode, fn) { return new Promise((res, rej) => { if (!DB.db) return rej(new Error('Сховище недоступне')); const t = DB.db.transaction('clips', mode); const r = fn(t.objectStore('clips')); t.oncomplete = () => res(r.result); t.onerror = () => rej(t.error); }); },
+ put(id, v) { return DB.req('readwrite', s => s.put(v, id)); },
+ del(id) { return DB.req('readwrite', s => s.delete(id)); },
+ all() { return new Promise((res, rej) => { if (!DB.db) return res([]); const out = []; const t = DB.db.transaction('clips'); t.objectStore('clips').openCursor().onsuccess = e => { const c = e.target.result; if (c) { out.push([c.key, c.value]); c.continue(); } }; t.oncomplete = () => res(out); t.onerror = () => rej(t.error); }); }
+};
+function setClip(id, blob) { if (CLIPS.has(id)) URL.revokeObjectURL(CLIPS.get(id)); CLIPS.set(id, URL.createObjectURL(blob)); }
+function loadVoices() { try { voices = speechSynthesis.getVoices() || []; } catch (e) { voices = []; } }
+if ('speechSynthesis' in window) { loadVoices(); speechSynthesis.onvoiceschanged = loadVoices; }
+const esVoices = () => voices.filter(v => /^es([-_]|$)/i.test(v.lang));
+function esVoice() {
+ const vs = esVoices(); if (!vs.length) return null;
+ if (S.settings.voice) { const f = vs.find(v => v.name === S.settings.voice); if (f) return f; }
+ const q = v => /natural|neural|enhanced|premium|google/i.test(v.name) ? 0 : 1;
+ for (const p of ['es-mx', 'es-us', 'es-419', 'es-co']) { const f = vs.filter(v => v.lang.replace('_', '-').toLowerCase() === p).sort((a, b) => q(a) - q(b))[0]; if (f) return f; }
+ return vs.find(v => !/es[-_]es/i.test(v.lang)) || vs[0];
+}
+const audioPossible = id => CLIPS.has(id) || !!BUNDLE[id] || !!esVoice();
+function stopAudio() { try { if (curAudio) { curAudio.pause(); curAudio = null; } if ('speechSynthesis' in window) speechSynthesis.cancel(); } catch (e) {} }
+function playFile(src, slow) { const a = new Audio(src); a.playbackRate = slow ? 0.7 : 1; curAudio = a; a.play().catch(() => {}); }
+function speak(text, slow) {
+ if (!('speechSynthesis' in window)) return false; const v = esVoice(); if (!v) return false;
+ const u = new SpeechSynthesisUtterance(text.replace(/\s\/\s/g, '. ')); u.voice = v; u.lang = v.lang; u.rate = slow ? 0.6 : (+S.settings.rate || 0.9);
+ speechSynthesis.speak(u); return true;
+}
+function play(id, slow, quiet) {
+ stopAudio();
+ if (CLIPS.has(id)) return playFile(CLIPS.get(id), slow);
+ if (BUNDLE[id]) return playFile('audio/' + BUNDLE[id], slow);
+ if (!speak(ITEMS[id].es, slow) && !quiet) toast('На цьому пристрої немає іспанського голосу. Див. «Налаштування».');
+}
+const autoplay = id => setTimeout(() => play(id, false, true), 300);
+let AC = null;
+function tone(ok) {
+ if (!S.settings.sfx) return;
+ try { AC = AC || new (window.AudioContext || window.webkitAudioContext)(); const t0 = AC.currentTime;
+  (ok ? [660, 880] : [220, 175]).forEach((f, i) => { const o = AC.createOscillator(), g = AC.createGain(), t = t0 + i * 0.09; o.type = ok ? 'sine' : 'square'; o.frequency.value = f; g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(ok ? 0.15 : 0.05, t + 0.01); g.gain.exponentialRampToValueAtTime(0.0001, t + 0.15); o.connect(g); g.connect(AC.destination); o.start(t); o.stop(t + 0.16); });
+ } catch (e) {}
+}
+let toastT = null;
+function toast(msg) { let t = $('.toast'); if (!t) { t = document.createElement('div'); t.className = 'toast'; document.body.appendChild(t); } t.textContent = msg; clearTimeout(toastT); toastT = setTimeout(() => t.remove(), 3500); }
+
+/* ---------- speech recognition ---------- */
+const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+const canSpeak = () => !!SR && S.settings.mic && Date.now() > (S.micOffUntil || 0);
+function recognize(ok, bad) {
+ const r = new SR(); r.lang = 'es-MX'; r.interimResults = false; r.maxAlternatives = 5; let got = false;
+ r.onresult = e => { got = true; ok([...e.results[0]].map(a => a.transcript)); };
+ r.onerror = e => { got = true; bad(e.error); };
+ r.onend = () => { if (!got) bad('no-speech'); };
+ try { r.start(); } catch (e) { got = true; bad('start'); }
+ return r;
+}
+function bestMatch(alts, target) { const t = norm(target); let best = {score: 0, text: alts[0] || ''}; alts.forEach(a => { const s = sim(norm(a), t); if (s > best.score) best = {score: s, text: a}; }); return best; }
+
+/* ---------- UI bits ---------- */
+const playBtn = (id, big) => `<button class="play ${big ? 'big' : ''}" data-play="${id}" aria-label="Прослухати">${ICON.spk}</button>`;
+const PRAISE = ['Правильно!', 'Чудово!', 'Так тримати!', 'Точно!', 'Відмінно!'];
+const praise = () => PRAISE[Math.random() * PRAISE.length | 0];
+function foot(html, flat) { const f = $('#foot'); f.innerHTML = html; f.classList.toggle('flat', !!flat); }
+let deferredPrompt = null;
+const ACT = {};
+document.addEventListener('click', e => {
+ const p = e.target.closest('[data-play]'); if (p) { play(p.dataset.play, p.dataset.slow === '1'); return; }
+ const a = e.target.closest('[data-act]'); if (a && ACT[a.dataset.act]) ACT[a.dataset.act](a, e);
+});
+
+/* ---------- home ---------- */
+let L = null;
+function home() {
+ stopAudio(); if (L && L.timer) clearTimeout(L.timer); L = null;
+ const due = dueItems().length, seen = seenItems().length, str = shownStreak();
+ let globalNext = null;
+ UNITS.some((u, ui) => { const li = u.lessons.findIndex((_, k) => !S.done[ui + '-' + k]); if (li >= 0) { globalNext = ui + '-' + li; return true; } return false; });
+ app.innerHTML = `<header class="top">
+  <div class="stat fire ${str ? '' : 'off'}" title="Днів поспіль">${ICON.fire}${str}</div>
+  <div class="stat xp" title="Досвід">${ICON.bolt}${S.xp}</div>
+  <div class="brand">Команди <b>ES</b></div>
+  ${deferredPrompt ? '<button class="inst" data-act="install">Встановити</button>' : ''}
+  <button class="icon" data-act="settings" aria-label="Налаштування">${ICON.gear}</button></header>
+ <main class="home">
+  ${seen ? `<button class="review" data-act="review">${ICON.rep}<div><b>${due ? 'Повторення' : 'Вільне тренування'}</b><span>${due ? 'Помилки і фрази, які пора освіжити' : 'Випадкові вивчені фрази'}</span></div>${due ? `<span class="cnt">${due}</span>` : ''}</button>` : ''}
+  ${UNITS.map((u, ui) => unitBlock(u, ui, globalNext)).join('')}
+  <p class="foot-note">Прогрес зберігається на цьому пристрої.</p>
+ </main>`;
+}
+function unitBlock(u, ui, globalNext) {
+ const n = u.lessons.length, doneN = u.lessons.filter((_, li) => S.done[ui + '-' + li]).length;
+ const zig = [0, 48, 72, 48, 0, -48, -72, -48];
+ const nodes = u.lessons.map((ids, li) => {
+  const d = S.done[ui + '-' + li], cur = globalNext === ui + '-' + li;
+  return `<div class="nw" style="transform:translateX(${zig[li % 8]}px)"><button class="node ${d ? 'done' : ''} ${cur ? 'cur' : ''}" data-act="lesson" data-u="${ui}" data-l="${li}" aria-label="Урок ${li + 1}">${d ? ICON.check : li + 1}</button>${cur ? '<span class="start">Почати</span>' : ''}</div>`;
+ });
+ if (ui === 0) nodes.push(`<div class="nw" style="transform:translateX(${zig[n % 8]}px)"><button class="node reflex" data-act="reflex" aria-label="Рефлекс-тренування">${ICON.bolt}</button><span class="lbl">Рефлекс 3 с</span></div>`);
+ return `<section class="unit" style="--uc:${u.c}">
+  <div class="ubanner"><div><div class="unum">Розділ ${ui + 1}</div><h2>${esc(u.t)}</h2><div class="usub">${esc(u.s)} · ${u.ids.length} фраз</div></div>
+  <button class="ulist" data-act="list" data-u="${ui}" aria-label="Шпаргалка розділу">${ICON.list}</button></div>
+  <div class="path">${nodes.join('')}</div>
+  <div class="uprog">${doneN} з ${n} уроків</div></section>`;
+}
+
+/* ---------- sessions ---------- */
+const newL = (kind, meta, queue) => ({kind, ...meta, queue, idx: 0, first: 0, wrong: new Set(), boost: new Set(), timer: null});
+function startLesson(ui, li) {
+ const ids = UNITS[ui].lessons[li], es2ua = UNITS[ui].dir === 'es2ua', q = [];
+ ids.forEach(id => { if (!st(id).seen) q.push({t: 'intro', id}); q.push({t: es2ua ? 'listen' : 'pick', id}); });
+ shuffle(ids).forEach(id => q.push(es2ua ? {t: 'read', id} : {t: words(ITEMS[id].es).length >= 2 ? 'tiles' : 'listen', id}));
+ if (!es2ua && canSpeak()) sample(ids.filter(id => words(ITEMS[id].es).length <= 5), 2).forEach(id => q.push({t: 'speak', id}));
+ L = newL('lesson', {ui, li}, q); renderEx();
+}
+function startReview() {
+ const due = dueItems(); const ids = due.length ? sample(due, 12) : sample(seenItems(), 10);
+ const q = ids.map(id => { const it = ITEMS[id]; if (it.dir === 'es2ua') return {t: Math.random() < .5 ? 'listen' : 'read', id}; const o = ['pick', 'listen']; if (words(it.es).length >= 2) o.push('tiles'); return {t: o[Math.random() * o.length | 0], id}; });
+ L = newL('review', {}, q); renderEx();
+}
+function startReflex() { L = newL('reflex', {}, sample(UNITS[0].ids, 12).map(id => ({t: 'reflex', id}))); renderEx(); }
+function srsBad(id) { const s = st(id); s.box = 1; s.due = today(); L.wrong.add(id); }
+function srsGood(id) { if (L.wrong.has(id) || L.boost.has(id)) return; const s = st(id); s.seen = true; s.box = Math.min((s.box || 0) + 1, 6); s.due = addDays(today(), INT[s.box]); L.boost.add(id); }
+function next() { L.idx++; if (L.idx >= L.queue.length) finish(); else renderEx(); }
+function finish() {
+ const bonus = L.kind === 'lesson' ? 5 : 2, gained = L.first + bonus;
+ S.xp += gained; bumpStreak();
+ if (L.kind === 'lesson') { const k = L.ui + '-' + L.li; S.done[k] = (S.done[k] || 0) + 1; L.queue.forEach(e => markSeen(e.id)); }
+ save();
+ const graded = L.queue.filter(e => e.t !== 'intro' && !e.retry).length, acc = graded ? Math.round(100 * L.first / graded) : 100;
+ const title = L.kind === 'review' ? 'Повторення завершено' : L.kind === 'reflex' ? 'Рефлекс-тренування завершено' : 'Урок завершено!';
+ const wrong = L.wrong.size;
+ app.innerHTML = `<div class="result"><div class="trophy">${ICON.check}</div><h1>${title}</h1>
+  <div class="kpis"><div class="kpi"><b>+${gained}</b><span>досвіду</span></div><div class="kpi"><b>${acc}%</b><span>точність</span></div><div class="kpi"><b>${S.streak}</b><span>днів поспіль</span></div></div>
+  ${wrong ? `<p class="hint">Помилки (${wrong}) з'являться в «Повторенні».</p>` : ''}
+  <button class="btn" data-act="home">Продовжити</button></div>`;
+ L = null;
+}
+
+/* ---------- exercises ---------- */
+function renderEx() {
+ stopAudio(); if (L.timer) { clearTimeout(L.timer); L.timer = null; }
+ const ex = L.queue[L.idx], it = ITEMS[ex.id];
+ app.innerHTML = `<div class="lesson"><div class="lbar"><button class="x" data-act="home" aria-label="Вийти">✕</button><div class="prog"><i style="width:${Math.round(100 * L.idx / L.queue.length)}%"></i></div></div><div class="ex" id="ex"></div><div class="lfoot" id="foot"></div></div>`;
+ ({intro: exIntro, pick: exPick, listen: exListen, read: exRead, tiles: exTiles, speak: exSpeak, reflex: exReflex})[ex.t](ex, it);
+}
+function distractors(it, n, side) {
+ const key = id => norm(side === 'es' ? ITEMS[id].es : ITEMS[id].ua), mineEs = norm(it.es), seen = new Set([key(it.id)]), out = [];
+ for (const id of shuffle(UNITS[it.u].ids).concat(shuffle(Object.keys(ITEMS)))) {
+  if (out.length >= n) break; const k = key(id);
+  if (seen.has(k) || norm(ITEMS[id].es) === mineEs) continue; seen.add(k); out.push(id);
+ }
+ return out;
+}
+function choose(onSel, onCheck) {
+ let sel = null;
+ foot(`<button class="btn" id="chk" disabled>Перевірити</button>`);
+ $$('.opt').forEach(b => b.onclick = () => { $$('.opt').forEach(x => x.classList.remove('sel')); b.classList.add('sel'); sel = b.dataset.id; $('#chk').disabled = false; if (onSel) onSel(sel); });
+ $('#chk').onclick = () => { $$('.opt').forEach(x => x.disabled = true); onCheck(sel); };
+}
+function grade(ok, it, side, extra) {
+ const ex = L.queue[L.idx];
+ $$('.opt').forEach(b => { if (b.dataset.id === it.id) b.classList.add('right'); else if (b.classList.contains('sel') && !ok) b.classList.add('wrong'); });
+ tone(ok);
+ if (ok) { if (!ex.retry) L.first++; srsGood(it.id); }
+ else { srsBad(it.id); if (!ex.retry) L.queue.push({...ex, retry: true}); }
+ const ans = side === 'es' ? `${esc(it.es)}<small>${esc(it.pr)} · ${esc(it.ua)}</small>` : `${esc(it.ua)}<small>${esc(it.es)} · ${esc(it.pr)}</small>`;
+ foot(`<div class="sheet ${ok ? 'good' : 'bad'}"><div class="sh-t">${ok ? praise() : 'Правильна відповідь:'}</div>${extra || ''}<div class="sh-a">${ans}</div><button class="btn ${ok ? '' : 'red'}" id="nx">Далі</button></div>`, true);
+ $('#nx').onclick = next;
+ if (!ok) setTimeout(() => play(it.id, false, true), 350);
+}
+function exIntro(ex, it) {
+ const es2ua = it.dir === 'es2ua';
+ $('#ex').innerHTML = `<div class="kicker new">${es2ua ? 'Нова фраза курсанта' : 'Нова команда'}</div>
+  <div class="card">${playBtn(it.id, true)}<button class="slow" data-play="${it.id}" data-slow="1">Повільніше</button><div class="es">${esc(it.es)}</div><div class="pr">${esc(it.pr)}</div><div class="ua">${esc(it.ua)}</div></div>
+  <p class="hint">${es2ua ? 'Так вам відповідатиме курсант. Прослухайте кілька разів.' : 'Прослухайте і повторіть уголос.'}</p>`;
+ foot(`<button class="btn" id="go">Далі</button>`);
+ $('#go').onclick = () => { markSeen(it.id); next(); };
+ autoplay(it.id);
+}
+function exPick(ex, it) {
+ const opts = shuffle([it.id, ...distractors(it, 3, 'es')]);
+ $('#ex').innerHTML = `<div class="kicker">Як сказати іспанською?</div><div class="prompt">${esc(it.ua)}</div>
+  <div class="opts">${opts.map(id => `<button class="opt" data-id="${id}"><span class="o-es">${esc(ITEMS[id].es)}</span><span class="o-pr">${esc(ITEMS[id].pr)}</span></button>`).join('')}</div>`;
+ choose(id => play(id, false, true), sel => grade(sel === it.id, it, 'es'));
+}
+function uaOptions(it) { return shuffle([it.id, ...distractors(it, 3, 'ua')]).map(id => `<button class="opt" data-id="${id}"><span>${esc(ITEMS[id].ua)}</span></button>`).join(''); }
+function exListen(ex, it) {
+ if (!audioPossible(it.id)) return exRead(ex, it);
+ $('#ex').innerHTML = `<div class="kicker">Що ви почули?</div>
+  <div class="listen">${playBtn(it.id, true)}<button class="slow" data-play="${it.id}" data-slow="1">Повільніше</button></div>
+  <div class="opts">${uaOptions(it)}</div><button class="link" id="showtxt">Показати текст</button><div id="txt"></div>`;
+ $('#showtxt').onclick = () => { $('#txt').innerHTML = `<div class="es sm">${esc(it.es)}</div>`; $('#showtxt').remove(); };
+ choose(null, sel => grade(sel === it.id, it, 'ua'));
+ autoplay(it.id);
+}
+function exRead(ex, it) {
+ $('#ex').innerHTML = `<div class="kicker">Що це означає?</div><div class="card">${playBtn(it.id)}<div class="es">${esc(it.es)}</div><div class="pr">${esc(it.pr)}</div></div><div class="opts">${uaOptions(it)}</div>`;
+ choose(null, sel => grade(sel === it.id, it, 'ua'));
+}
+function exTiles(ex, it) {
+ const target = words(it.es), tn = new Set(target.map(norm)), pool = new Map();
+ UNITS[it.u].ids.forEach(id => { if (id !== it.id) words(ITEMS[id].es).forEach(w => { const k = norm(w); if (!tn.has(k) && !pool.has(k)) pool.set(k, w); }); });
+ const extra = sample([...pool.values()], Math.max(2, Math.min(4, 7 - target.length)));
+ const bank = shuffle([...target, ...extra]).map((w, i) => ({w, i, used: false})), ans = [];
+ $('#ex').innerHTML = `<div class="kicker">Складіть іспанською</div><div class="prompt">${esc(it.ua)}</div><div class="ansarea" id="ans"></div><div class="bank" id="bank"></div>`;
+ foot(`<button class="btn" id="chk" disabled>Перевірити</button>`);
+ let locked = false;
+ const draw = () => {
+  $('#ans').innerHTML = ans.map((b, k) => `<button class="tile" data-k="${k}">${esc(b.w)}</button>`).join('');
+  $('#bank').innerHTML = bank.map(b => `<button class="tile ${b.used ? 'used' : ''}" data-i="${b.i}" ${b.used ? 'disabled' : ''}>${esc(b.w)}</button>`).join('');
+  $('#chk').disabled = !ans.length;
+  $$('#ans .tile').forEach(t => t.onclick = () => { if (locked) return; ans.splice(+t.dataset.k, 1)[0].used = false; draw(); });
+  $$('#bank .tile').forEach(t => t.onclick = () => { if (locked) return; const b = bank.find(x => x.i === +t.dataset.i); if (b.used) return; b.used = true; ans.push(b); draw(); });
+ };
+ draw();
+ $('#chk').onclick = () => { locked = true; grade(norm(ans.map(b => b.w).join(' ')) === norm(it.es), it, 'es'); };
+}
+function exSpeak(ex, it) {
+ $('#ex').innerHTML = `<div class="kicker">Скажіть іспанською</div><div class="prompt">${esc(it.ua)}</div>
+  <div class="card">${playBtn(it.id)}<div class="es">${esc(it.es)}</div><div class="pr">${esc(it.pr)}</div></div>
+  <div class="micwrap"><button class="mic" id="mic" aria-label="Говорити">${ICON.mic}</button><div class="heard" id="heard">Натисніть і скажіть фразу</div></div>`;
+ foot(`<button class="btn ghost" id="skip">Не можу говорити зараз</button>`);
+ $('#skip').onclick = () => { S.micOffUntil = Date.now() + 15 * 60e3; save(); L.queue = L.queue.filter((e, k) => k <= L.idx || e.t !== 'speak'); toast('Вправи з мікрофоном вимкнено на 15 хвилин'); next(); };
+ let tries = 0, r = null;
+ const done = (ok, text) => {
+  tone(ok); if (ok && !ex.retry) L.first++;
+  foot(`<div class="sheet ${ok ? 'good' : 'bad'}"><div class="sh-t">${ok ? praise() : 'Майже. Прослухайте ще раз'}</div><div class="sh-a">Почуто: «${esc(text || '…')}»<small>${esc(it.es)} · ${esc(it.pr)}</small></div><button class="btn ${ok ? '' : 'red'}" id="nx">Далі</button></div>`, true);
+  $('#nx').onclick = next; if (!ok) setTimeout(() => play(it.id, false, true), 300);
+ };
+ $('#mic').onclick = () => {
+  if (r) { try { r.stop(); } catch (e) {} return; }
+  stopAudio(); $('#mic').classList.add('on'); $('#heard').textContent = 'Слухаю…';
+  r = recognize(alts => {
+   r = null; $('#mic').classList.remove('on'); const best = bestMatch(alts, it.es); tries++;
+   if (best.score >= 0.6) done(true, best.text);
+   else if (tries < 2) $('#heard').innerHTML = `Почуто: «${esc(best.text || '…')}». Спробуйте ще раз.`;
+   else done(false, best.text);
+  }, err => {
+   r = null; $('#mic').classList.remove('on');
+   $('#heard').textContent = /not-allowed|service-not-allowed/.test(err) ? 'Немає доступу до мікрофона. Дозвольте його в налаштуваннях браузера або пропустіть вправу.' : 'Не вдалося розпізнати. Спробуйте ще раз.';
+  });
+ };
+}
+function exReflex(ex, it) {
+ const opts = shuffle([it.id, ...distractors(it, 3, 'es')]), T = 3000;
+ $('#ex').innerHTML = `<div class="kicker red">Рефлекс · 3 секунди</div><div class="prompt big">${esc(it.ua)}</div><div class="timer"><i id="tm"></i></div>
+  <div class="opts">${opts.map(id => `<button class="opt" data-id="${id}"><span class="o-es">${esc(ITEMS[id].es)}</span></button>`).join('')}</div>`;
+ foot('<p class="hint">Оберіть правильну команду, поки не вийшов час.</p>', true);
+ const tm = $('#tm'); void tm.offsetWidth; tm.style.transition = `width ${T}ms linear`; tm.style.width = '0%';
+ let finished = false;
+ L.timer = setTimeout(() => { if (finished) return; finished = true; $$('.opt').forEach(b => b.disabled = true); grade(false, it, 'es', '<div class="sh-n">Час вийшов</div>'); }, T);
+ $$('.opt').forEach(b => b.onclick = () => { if (finished) return; finished = true; clearTimeout(L.timer); tm.style.transition = 'none'; b.classList.add('sel'); $$('.opt').forEach(x => x.disabled = true); grade(b.dataset.id === it.id, it, 'es'); });
+}
+
+/* ---------- cheat sheet view ---------- */
+function showList(ui) {
+ stopAudio(); const u = UNITS[ui];
+ app.innerHTML = `<header class="top sub"><button class="x" data-act="home" aria-label="Назад">←</button><div class="brand">${ui + 1}. ${esc(u.t)}</div><span style="width:40px"></span></header>
+ <main class="list">${u.ids.map(id => { const it = ITEMS[id]; return `<div class="row">${playBtn(id)}<div class="rtxt"><div class="r-es">${esc(it.es)}</div><div class="r-pr">${esc(it.pr)}</div><div class="r-ua">${esc(it.ua)}</div></div></div>`; }).join('')}</main>`;
+}
+
+/* ---------- settings ---------- */
+function showSettings() {
+ stopAudio(); const vs = esVoices(), total = Object.keys(ITEMS).length;
+ app.innerHTML = `<header class="top sub"><button class="x" data-act="home" aria-label="Назад">←</button><div class="brand">Налаштування</div><span style="width:40px"></span></header>
+ <main class="set">
+  <section class="box"><h3>Голос</h3>
+   ${vs.length ? `<select id="voice"><option value="">Автоматично</option>${vs.map(v => `<option value="${esc(v.name)}" ${S.settings.voice === v.name ? 'selected' : ''}>${esc(v.name)} (${esc(v.lang)})</option>`).join('')}</select>`
+    : `<p class="warn">На цьому пристрої не знайдено іспанського голосу.</p><ul class="how"><li><b>Windows:</b> Параметри → Час і мова → Мовлення → Додати голоси → Español (México). Або відкрийте застосунок у Edge чи Chrome.</li><li><b>Android:</b> Налаштування → Синтез мовлення → встановіть іспанські голосові дані.</li><li><b>iPhone:</b> Параметри → Доступність → Вміст мовлення → Голоси → Español.</li></ul>`}
+   <label class="rng">Швидкість мовлення: <span id="rv">${S.settings.rate}</span><input type="range" id="rate" min="0.6" max="1.1" step="0.05" value="${S.settings.rate}"></label>
+   <button class="btn ghost small" id="test">Прослухати приклад</button>
+   <p class="note">Записи носія мають пріоритет над синтезованим голосом. Записано на цьому пристрої: <b>${CLIPS.size}</b> з ${total}.</p>
+   <button class="btn small" data-act="rec">Запис голосу носія</button></section>
+  <section class="box"><h3>Вправи</h3>
+   <label class="sw"><input type="checkbox" id="mic" ${S.settings.mic ? 'checked' : ''} ${SR ? '' : 'disabled'}> Вправи «Скажіть» (мікрофон)</label>
+   ${SR ? '' : '<p class="note">Цей браузер не розпізнає мовлення, тому вправи «Скажіть» пропускаються. Спробуйте Chrome, Edge або Safari.</p>'}
+   <label class="sw"><input type="checkbox" id="sfx" ${S.settings.sfx ? 'checked' : ''}> Звуки правильної / неправильної відповіді</label></section>
+  <section class="box"><h3>Встановити як застосунок</h3><ul class="how">
+   <li><b>Android (Chrome):</b> меню ⋮ → «Додати на головний екран» або «Встановити застосунок».</li>
+   <li><b>iPhone (Safari):</b> кнопка «Поділитися» → «На Початковий екран».</li>
+   <li><b>Windows (Edge або Chrome):</b> значок встановлення в адресному рядку або меню → «Застосунки» → «Установити».</li></ul>
+   <p class="note">Після першого відкриття уроки працюють без інтернету. Синтезований голос на деяких пристроях потребує мережі; записи носія — ні.</p></section>
+  <section class="box"><h3>Прогрес</h3><p class="note">Досвід: ${S.xp} · вивчено фраз: ${seenItems().length} з ${total}. Прогрес зберігається лише на цьому пристрої.</p>
+   <button class="btn ghost small red-t" id="reset">Скинути прогрес</button></section>
+  <p class="ver">Версія ${VERSION}</p></main>`;
+ const vSel = $('#voice'); if (vSel) vSel.onchange = () => { S.settings.voice = vSel.value; save(); speak('¡Atención!'); };
+ $('#rate').oninput = e => { S.settings.rate = +e.target.value; $('#rv').textContent = S.settings.rate; save(); };
+ $('#test').onclick = () => { stopAudio(); if (!speak('¡Alto! ¡Desarme! ¡Aterrice ya!')) toast('Іспанського голосу не знайдено'); };
+ $('#mic').onchange = e => { S.settings.mic = e.target.checked; S.micOffUntil = 0; save(); };
+ $('#sfx').onchange = e => { S.settings.sfx = e.target.checked; save(); };
+ let armed = false;
+ $('#reset').onclick = e => { if (!armed) { armed = true; e.target.textContent = 'Натисніть ще раз для підтвердження'; return; } S = {...defState(), settings: S.settings}; save(); toast('Прогрес скинуто'); home(); };
+}
+
+/* ---------- native-speaker recording ---------- */
+let recState = null;
+function pickMime() { if (!window.MediaRecorder || !MediaRecorder.isTypeSupported) return ''; return ['audio/mp4', 'audio/webm;codecs=opus', 'audio/webm', 'audio/ogg'].find(t => MediaRecorder.isTypeSupported(t)) || ''; }
+function recRow(id) {
+ const it = ITEMS[id], has = CLIPS.has(id), on = recState && recState.id === id;
+ return `<div class="row ${on ? 'recording' : ''}" id="r-${id}"><button class="recb ${on ? 'on' : ''}" data-rec="${id}" aria-label="${on ? 'Зупинити' : 'Записати'}">${on ? '■' : '●'}</button>
+  <div class="rtxt"><div class="r-es">${esc(it.es)}</div><div class="r-ua">${esc(it.ua)}</div></div>
+  ${has ? `${playBtn(id)}<button class="del" data-del="${id}" aria-label="Видалити запис">✕</button>` : '<span class="tag">—</span>'}</div>`;
+}
+const redrawRow = id => { const r = $('#r-' + id); if (r) r.outerHTML = recRow(id); };
+function showRec() {
+ stopAudio(); const can = !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia && window.MediaRecorder);
+ app.innerHTML = `<header class="top sub"><button class="x" data-act="settings" aria-label="Назад">←</button><div class="brand">Запис голосу носія</div><span style="width:40px"></span></header>
+ <main class="list"><div class="box" style="margin-top:12px">
+  <p>Попросіть курсанта, для якого іспанська рідна, начитати фрази. Натисніть <b>●</b>, скажіть фразу, натисніть <b>■</b>. Запис одразу замінить синтезований голос на цьому пристрої.</p>
+  <p class="note">Щоб перенести записи на інший телефон чи ПК — «Експорт» тут і «Імпорт» там. Щоб записи отримали всі, передайте файл експорту тому, хто оновлює застосунок.</p>
+  <div class="row2"><button class="btn ghost small" id="exp">Експорт</button><label class="btn ghost small">Імпорт<input type="file" id="imp" accept=".json,application/json" hidden></label></div>
+  <p class="note" id="recmsg">Записано: ${CLIPS.size} з ${Object.keys(ITEMS).length}</p>
+  ${can ? '' : '<p class="warn">Цей браузер не підтримує запис звуку.</p>'}</div>
+  ${UNITS.map((u, ui) => `<h3 class="uh">${ui + 1}. ${esc(u.t)}</h3>` + u.ids.map(recRow).join('')).join('')}</main>`;
+ $('main').addEventListener('click', async e => {
+  const rb = e.target.closest('[data-rec]'), db = e.target.closest('[data-del]');
+  if (rb) { if (!can) return toast('Запис не підтримується'); toggleRec(rb.dataset.rec); }
+  if (db) { const id = db.dataset.del; try { await DB.del(id); } catch (er) {} if (CLIPS.has(id)) URL.revokeObjectURL(CLIPS.get(id)); CLIPS.delete(id); redrawRow(id); updMsg(); }
+ });
+ $('#exp').onclick = exportClips;
+ $('#imp').onchange = e => { const f = e.target.files[0]; if (f) importClips(f); e.target.value = ''; };
+}
+const updMsg = () => { const m = $('#recmsg'); if (m) m.textContent = `Записано: ${CLIPS.size} з ${Object.keys(ITEMS).length}`; };
+async function toggleRec(id) {
+ if (recState) { const same = recState.id === id; recState.stop(); if (same) return; await new Promise(r => setTimeout(r, 250)); }
+ stopAudio();
+ let stream; try { stream = await navigator.mediaDevices.getUserMedia({audio: true}); } catch (e) { return toast('Немає доступу до мікрофона'); }
+ const mime = pickMime(); const mr = new MediaRecorder(stream, mime ? {mimeType: mime} : undefined); const chunks = [];
+ mr.ondataavailable = e => { if (e.data && e.data.size) chunks.push(e.data); };
+ mr.onstop = async () => {
+  stream.getTracks().forEach(t => t.stop()); clearTimeout(recState && recState.cap); recState = null;
+  const blob = new Blob(chunks, {type: mr.mimeType || mime || 'audio/webm'});
+  if (blob.size > 800) { setClip(id, blob); try { await DB.put(id, {blob, type: blob.type, t: Date.now()}); } catch (e) { toast('Запис працює, але не збережеться після перезапуску'); } }
+  redrawRow(id); updMsg();
+ };
+ recState = {id, stop: () => { try { mr.stop(); } catch (e) {} }, cap: setTimeout(() => recState && recState.id === id && recState.stop(), 8000)};
+ mr.start(); redrawRow(id);
+}
+const blobToDataURL = b => new Promise(r => { const fr = new FileReader(); fr.onload = () => r(fr.result); fr.readAsDataURL(b); });
+async function exportClips() {
+ const all = await DB.all(); if (!all.length) return toast('Ще немає записів');
+ const out = {app: 'komandy-es', v: 1, clips: {}};
+ for (const [id, v] of all) out.clips[id] = {type: v.type, es: ITEMS[id] ? ITEMS[id].es : '', data: await blobToDataURL(v.blob)};
+ const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([JSON.stringify(out)], {type: 'application/json'}));
+ a.download = 'zapysy-holosu.json'; document.body.appendChild(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 1500);
+}
+async function importClips(file) {
+ try {
+  const data = JSON.parse(await file.text()); let n = 0;
+  for (const [id, c] of Object.entries(data.clips || {})) { if (!ITEMS[id] || !c.data) continue; const blob = await (await fetch(c.data)).blob(); setClip(id, blob); try { await DB.put(id, {blob, type: c.type || blob.type, t: Date.now()}); } catch (e) {} n++; }
+  toast(`Імпортовано записів: ${n}`); showRec();
+ } catch (e) { toast('Не вдалося прочитати файл'); }
+}
+
+/* ---------- actions & start ---------- */
+Object.assign(ACT, {
+ home, settings: showSettings, rec: showRec, review: startReview, reflex: startReflex,
+ lesson: a => startLesson(+a.dataset.u, +a.dataset.l),
+ list: a => showList(+a.dataset.u),
+ install: async () => { if (!deferredPrompt) return; deferredPrompt.prompt(); try { await deferredPrompt.userChoice; } catch (e) {} deferredPrompt = null; home(); }
+});
+window.addEventListener('beforeinstallprompt', e => { e.preventDefault(); deferredPrompt = e; if (!L && $('.home')) home(); });
+home();
+(async () => {
+ await DB.open();
+ try { (await DB.all()).forEach(([id, v]) => { if (v && v.blob) setClip(id, v.blob); }); } catch (e) {}
+ try { const r = await fetch('audio/index.json', {cache: 'no-cache'}); if (r.ok) BUNDLE = await r.json(); } catch (e) {}
+ try { if ('serviceWorker' in navigator && location.protocol === 'https:' && window.top === window.self) navigator.serviceWorker.register('sw.js').catch(() => {}); } catch (e) {}
+})();
+</script>
+</body>
+</html>
