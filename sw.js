@@ -1,5 +1,5 @@
 // Offline cache for "Команди ES". Bump VERSION whenever index.html or the audio folder changes.
-const VERSION = 'komandy-es-v2';
+const VERSION = 'komandy-es-v5';
 const SHELL = ['./', './index.html', './manifest.webmanifest', './icons/icon-192.png', './icons/icon-512.png', './icons/apple-touch-icon.png', './audio/index.json'];
 
 self.addEventListener('install', e => {
@@ -12,6 +12,8 @@ self.addEventListener('install', e => {
       const files = [...new Set(Object.values(index))].map(f => './audio/' + f);
       for (let i = 0; i < files.length; i += 10) await cache.addAll(files.slice(i, i + 10));
     } catch (err) { /* no bundled audio yet */ }
+    // Single words for the tile exercise (one packed file), if present.
+    try { await cache.add('./audio/words.json'); const w = await (await cache.match('./audio/words.json')).json(); await cache.add('./audio/' + w.file); } catch (err) {}
     await self.skipWaiting();
   })());
 });

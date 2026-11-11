@@ -156,7 +156,7 @@ input[type=range]{width:100%;accent-color:var(--go)}
 <noscript>Увімкніть JavaScript, щоб користуватися застосунком.</noscript>
 <script>
 'use strict';
-const VERSION = '1.1 · 10.11.2026';
+const VERSION = '1.3 · 11.11.2026';
 
 /* ---------- CONTENT: from the cheat sheet. Format: [Ukrainian, Spanish, pronunciation]. "+" marks the stressed vowel. ---------- */
 const U = [
@@ -327,8 +327,8 @@ const UNITS = U.map((u, ui) => {
 
 /* ---------- state ---------- */
 const KEY = 'komES.v1';
-const defState = () => ({xp: 0, streak: 0, lastDay: null, items: {}, done: {}, micOffUntil: 0, settings: {mic: true, sfx: true, rate: 0.9, voice: ''}});
-function load() { try { const s = JSON.parse(localStorage.getItem(KEY)); if (s) { const d = defState(); return {...d, ...s, settings: {...d.settings, ...(s.settings || {})}}; } } catch (e) {} return defState(); }
+const defState = () => ({xp: 0, streak: 0, lastDay: null, items: {}, done: {}, micOffUntil: 0, settings: {mic: true, sfx: true}});
+function load() { try { const s = JSON.parse(localStorage.getItem(KEY)); if (s) { const d = defState(); const st_ = {...d.settings, ...(s.settings || {})}; delete st_.rate; delete st_.voice; return {...d, ...s, settings: st_}; } } catch (e) {} return defState(); }
 let S = load();
 function save() { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} }
 const INT = [0, 1, 2, 4, 7, 15, 30];
@@ -339,12 +339,13 @@ function seenItems() { return Object.keys(ITEMS).filter(id => S.items[id] && S.i
 function shownStreak() { const t = today(); return (S.lastDay === t || S.lastDay === addDays(t, -1)) ? S.streak : 0; }
 function bumpStreak() { const t = today(); if (S.lastDay === t) return; S.streak = S.lastDay === addDays(t, -1) ? S.streak + 1 : 1; S.lastDay = t; }
 
-/* ---------- audio: native recordings > bundled files > device voice ---------- */
+/* ---------- audio: native recordings on this device > bundled files in ./audio/ ---------- */
 const CLIPS = new Map();   // id -> object URL (recorded on this device)
 let BUNDLE = {};           // id -> file name in ./audio/
 const BUNDLE_URL = new Map(); // id -> object URL of a preloaded bundled file
-let voices = [];
 let curAudio = null;
+let WSPRITE = null;           // {buf: AudioBuffer, words: {word: [start, length]}} from audio/words.*
+let wordSrc = null;
 const DB = {
  db: null,
  open() { return new Promise(res => { try { const r = indexedDB.open('komES', 1); r.onupgradeneeded = () => r.result.createObjectStore('clips'); r.onsuccess = () => { DB.db = r.result; res(); }; r.onerror = () => res(); } catch (e) { res(); } }); },
@@ -354,36 +355,35 @@ const DB = {
  all() { return new Promise((res, rej) => { if (!DB.db) return res([]); const out = []; const t = DB.db.transaction('clips'); t.objectStore('clips').openCursor().onsuccess = e => { const c = e.target.result; if (c) { out.push([c.key, c.value]); c.continue(); } }; t.oncomplete = () => res(out); t.onerror = () => rej(t.error); }); }
 };
 function setClip(id, blob) { if (CLIPS.has(id)) URL.revokeObjectURL(CLIPS.get(id)); CLIPS.set(id, URL.createObjectURL(blob)); }
-function loadVoices() { try { voices = speechSynthesis.getVoices() || []; } catch (e) { voices = []; } }
-if ('speechSynthesis' in window) { loadVoices(); speechSynthesis.onvoiceschanged = loadVoices; }
-const esVoices = () => voices.filter(v => /^es([-_]|$)/i.test(v.lang));
-function esVoice() {
- const vs = esVoices(); if (!vs.length) return null;
- if (S.settings.voice) { const f = vs.find(v => v.name === S.settings.voice); if (f) return f; }
- const q = v => /natural|neural|enhanced|premium|google/i.test(v.name) ? 0 : 1;
- for (const p of ['es-mx', 'es-us', 'es-419', 'es-co']) { const f = vs.filter(v => v.lang.replace('_', '-').toLowerCase() === p).sort((a, b) => q(a) - q(b))[0]; if (f) return f; }
- return vs.find(v => !/es[-_]es/i.test(v.lang)) || vs[0];
-}
-const audioPossible = id => CLIPS.has(id) || BUNDLE_URL.has(id) || !!BUNDLE[id] || !!esVoice();
-function stopAudio() { try { if (curAudio) { curAudio.pause(); curAudio = null; } if ('speechSynthesis' in window) speechSynthesis.cancel(); } catch (e) {} }
+const audioPossible = id => CLIPS.has(id) || BUNDLE_URL.has(id) || !!BUNDLE[id];
+function stopAudio() { try { if (curAudio) { curAudio.pause(); curAudio = null; } if (wordSrc) { wordSrc.stop(); wordSrc = null; } } catch (e) {} }
 function playFile(src, slow) { const a = new Audio(src); a.playbackRate = slow ? 0.7 : 1; curAudio = a; a.play().catch(() => {}); }
-function speak(text, slow) {
- if (!('speechSynthesis' in window)) return false; const v = esVoice(); if (!v) return false;
- const u = new SpeechSynthesisUtterance(text.replace(/\s\/\s/g, '. ')); u.voice = v; u.lang = v.lang; u.rate = slow ? 0.6 : (+S.settings.rate || 0.9);
- speechSynthesis.speak(u); return true;
-}
 function play(id, slow, quiet) {
  stopAudio();
  if (CLIPS.has(id)) return playFile(CLIPS.get(id), slow);
  if (BUNDLE_URL.has(id)) return playFile(BUNDLE_URL.get(id), slow);
  if (BUNDLE[id]) return playFile('audio/' + BUNDLE[id], slow);
- if (!speak(ITEMS[id].es, slow) && !quiet) toast('На цьому пристрої немає іспанського голосу. Див. «Налаштування».');
+ if (!quiet) toast('Для цієї фрази ще немає запису');
 }
 const autoplay = id => setTimeout(() => play(id, false, true), 300);
 let AC = null;
+const getAC = () => AC || (AC = new (window.AudioContext || window.webkitAudioContext)());
+function playWord(w) {
+ if (!WSPRITE) return; const seg = WSPRITE.words[w.toLowerCase()]; if (!seg) return;
+ stopAudio();
+ try { const ctx = getAC(); if (ctx.state === 'suspended') ctx.resume(); const src = ctx.createBufferSource(); src.buffer = WSPRITE.buf; src.connect(ctx.destination); src.start(0, seg[0], seg[1]); wordSrc = src; } catch (e) {}
+}
+async function loadWords() {
+ try {
+  const r = await fetch('audio/words.json', {cache: 'no-cache'}); if (!r.ok) return; const j = await r.json();
+  const a = await fetch('audio/' + j.file); if (!a.ok) return; const ab = await a.arrayBuffer();
+  const buf = await new Promise((res, rej) => getAC().decodeAudioData(ab, res, rej));
+  WSPRITE = {buf, words: j.words};
+ } catch (e) {}
+}
 function tone(ok) {
  if (!S.settings.sfx) return;
- try { AC = AC || new (window.AudioContext || window.webkitAudioContext)(); const t0 = AC.currentTime;
+ try { const AC = getAC(); if (AC.state === 'suspended') AC.resume(); const t0 = AC.currentTime;
   (ok ? [660, 880] : [220, 175]).forEach((f, i) => { const o = AC.createOscillator(), g = AC.createGain(), t = t0 + i * 0.09; o.type = ok ? 'sine' : 'square'; o.frequency.value = f; g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(ok ? 0.15 : 0.05, t + 0.01); g.gain.exponentialRampToValueAtTime(0.0001, t + 0.15); o.connect(g); g.connect(AC.destination); o.start(t); o.stop(t + 0.16); });
  } catch (e) {}
 }
@@ -556,7 +556,7 @@ function exTiles(ex, it) {
   $('#bank').innerHTML = bank.map(b => `<button class="tile ${b.used ? 'used' : ''}" data-i="${b.i}" ${b.used ? 'disabled' : ''}>${esc(b.w)}</button>`).join('');
   $('#chk').disabled = !ans.length;
   $$('#ans .tile').forEach(t => t.onclick = () => { if (locked) return; ans.splice(+t.dataset.k, 1)[0].used = false; draw(); });
-  $$('#bank .tile').forEach(t => t.onclick = () => { if (locked) return; const b = bank.find(x => x.i === +t.dataset.i); if (b.used) return; b.used = true; ans.push(b); draw(); });
+  $$('#bank .tile').forEach(t => t.onclick = () => { if (locked) return; const b = bank.find(x => x.i === +t.dataset.i); if (b.used) return; b.used = true; ans.push(b); playWord(b.w); draw(); });
  };
  draw();
  $('#chk').onclick = () => { locked = true; grade(norm(ans.map(b => b.w).join(' ')) === norm(it.es), it, 'es'); };
@@ -607,15 +607,12 @@ function showList(ui) {
 
 /* ---------- settings ---------- */
 function showSettings() {
- stopAudio(); const vs = esVoices(), total = Object.keys(ITEMS).length;
+ stopAudio(); const total = Object.keys(ITEMS).length;
  app.innerHTML = `<header class="top sub"><button class="x" data-act="home" aria-label="Назад">←</button><div class="brand">Налаштування</div><span style="width:40px"></span></header>
  <main class="set">
-  <section class="box"><h3>Голос</h3>
-   ${vs.length ? `<select id="voice"><option value="">Автоматично</option>${vs.map(v => `<option value="${esc(v.name)}" ${S.settings.voice === v.name ? 'selected' : ''}>${esc(v.name)} (${esc(v.lang)})</option>`).join('')}</select>`
-    : `<p class="warn">На цьому пристрої не знайдено іспанського голосу.</p><ul class="how"><li><b>Windows:</b> Параметри → Час і мова → Мовлення → Додати голоси → Español (México). Або відкрийте застосунок у Edge чи Chrome.</li><li><b>Android:</b> Налаштування → Синтез мовлення → встановіть іспанські голосові дані.</li><li><b>iPhone:</b> Параметри → Доступність → Вміст мовлення → Голоси → Español.</li></ul>`}
-   <label class="rng">Швидкість мовлення: <span id="rv">${S.settings.rate}</span><input type="range" id="rate" min="0.6" max="1.1" step="0.05" value="${S.settings.rate}"></label>
+  <section class="box"><h3>Звук</h3>
+   <p class="note">Вбудовані записи: <b>${BUNDLE_URL.size || Object.keys(BUNDLE).length}</b> з ${total}. Записи носія, зроблені на цьому пристрої, звучать замість вбудованих: <b>${CLIPS.size}</b> з ${total}.</p>
    <button class="btn ghost small" id="test">Прослухати приклад</button>
-   <p class="note">Записи носія мають пріоритет над синтезованим голосом. Записано на цьому пристрої: <b>${CLIPS.size}</b> з ${total}.</p>
    <button class="btn small" data-act="rec">Запис голосу носія</button></section>
   <section class="box"><h3>Вправи</h3>
    <label class="sw"><input type="checkbox" id="mic" ${S.settings.mic ? 'checked' : ''} ${SR ? '' : 'disabled'}> Вправи «Скажіть» (мікрофон)</label>
@@ -625,13 +622,11 @@ function showSettings() {
    <li><b>Android (Chrome):</b> меню ⋮ → «Додати на головний екран» або «Встановити застосунок».</li>
    <li><b>iPhone (Safari):</b> кнопка «Поділитися» → «На Початковий екран».</li>
    <li><b>Windows (Edge або Chrome):</b> значок встановлення в адресному рядку або меню → «Застосунки» → «Установити».</li></ul>
-   <p class="note">Після першого відкриття уроки працюють без інтернету. Синтезований голос на деяких пристроях потребує мережі; записи носія — ні.</p></section>
+   <p class="note">Після першого відкриття уроки й звук працюють без інтернету.</p></section>
   <section class="box"><h3>Прогрес</h3><p class="note">Досвід: ${S.xp} · вивчено фраз: ${seenItems().length} з ${total}. Прогрес зберігається лише на цьому пристрої.</p>
    <button class="btn ghost small red-t" id="reset">Скинути прогрес</button></section>
   <p class="ver">Версія ${VERSION}</p></main>`;
- const vSel = $('#voice'); if (vSel) vSel.onchange = () => { S.settings.voice = vSel.value; save(); speak('¡Atención!'); };
- $('#rate').oninput = e => { S.settings.rate = +e.target.value; $('#rv').textContent = S.settings.rate; save(); };
- $('#test').onclick = () => { stopAudio(); if (!speak('¡Alto! ¡Desarme! ¡Aterrice ya!')) toast('Іспанського голосу не знайдено'); };
+ $('#test').onclick = () => play('u1-1');
  $('#mic').onchange = e => { S.settings.mic = e.target.checked; S.micOffUntil = 0; save(); };
  $('#sfx').onchange = e => { S.settings.sfx = e.target.checked; save(); };
  let armed = false;
@@ -652,7 +647,7 @@ function showRec() {
  stopAudio(); const can = !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia && window.MediaRecorder);
  app.innerHTML = `<header class="top sub"><button class="x" data-act="settings" aria-label="Назад">←</button><div class="brand">Запис голосу носія</div><span style="width:40px"></span></header>
  <main class="list"><div class="box" style="margin-top:12px">
-  <p>Попросіть курсанта, для якого іспанська рідна, начитати фрази. Натисніть <b>●</b>, скажіть фразу, натисніть <b>■</b>. Запис одразу замінить синтезований голос на цьому пристрої.</p>
+  <p>Попросіть курсанта, для якого іспанська рідна, начитати фрази. Натисніть <b>●</b>, скажіть фразу, натисніть <b>■</b>. Запис одразу звучатиме замість вбудованого на цьому пристрої.</p>
   <p class="note">Щоб перенести записи на інший телефон чи ПК — «Експорт» тут і «Імпорт» там. Щоб записи отримали всі, передайте файл експорту тому, хто оновлює застосунок.</p>
   <div class="row2"><button class="btn ghost small" id="exp">Експорт</button><label class="btn ghost small">Імпорт<input type="file" id="imp" accept=".json,application/json" hidden></label></div>
   <p class="note" id="recmsg">Записано: ${CLIPS.size} з ${Object.keys(ITEMS).length}</p>
@@ -718,7 +713,7 @@ home();
  await DB.open();
  try { (await DB.all()).forEach(([id, v]) => { if (v && v.blob) setClip(id, v.blob); }); } catch (e) {}
  try { const r = await fetch('audio/index.json', {cache: 'no-cache'}); if (r.ok) BUNDLE = await r.json(); } catch (e) {}
- preloadBundle();
+ preloadBundle(); loadWords();
  try { if ('serviceWorker' in navigator && window.isSecureContext && window.top === window.self) navigator.serviceWorker.register('sw.js').catch(() => {}); } catch (e) {}
 })();
 </script>
